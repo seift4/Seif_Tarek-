@@ -147,21 +147,6 @@ padding-left: 265px;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 *{
     margin:0;
     padding:0;
@@ -272,6 +257,7 @@ border-radius: 0px;
 .nav{
     position: fixed;
     top: 25px;
+    left: 10%;
     z-index: 1000;
     height: 50px;
     border-radius: 25px;
@@ -519,44 +505,54 @@ ul a:hover{
     opacity: 0.7;
   }
 }
+/* --- Media Queries للصيانة والتجاوب --- */
 
-
-/* --- Responsive Adjustments --- */
-
-/* الشاشات المتوسطة (Tablets) */
+/* 1. للشاشات المتوسطة (Tablets) */
 @media (max-width: 1024px) {
     .nav {
         width: 90%;
+        left: 5%;
     }
     .nav ul {
-        margin-left: 0;
+        margin-left: 0; /* إلغاء المارجن الكبير */
         gap: 15px;
-        padding-right: 20px;
     }
-    .text h1 {
-        width: 90%;
-        font-size: 45px;
-    }
-    .text span {
-        font-size: 60px;
-    }
-    .text p {
-        width: 90%;
-        font-size: 20px;
+    .text h1, .text p {
+        width: 90%; /* جعل النصوص تأخذ عرض الشاشة */
+        text-align: center;
     }
 }
 
-/* الموبايل (Phones) */
+/* 2. للشاشات الصغيرة (Mobile) */
 @media (max-width: 768px) {
-    .nav {
-        height: auto;
-        padding: 10px;
-        flex-direction: column; /* ترتيب اللوجو فوق اللينكات لو الشاشة صغيرة جداً */
-        border-radius: 15px;
+    /* إخفاء الماوس المخصص في الموبايل لأنه لا يوجد cursor */
+    .cursor-dot {
+        display: none;
+    }
+    body {
+        cursor: auto;
     }
 
+    /* تعديل اللودر ليناسب الموبايل */
+    #loader {
+        padding: 0; /* إلغاء البادينج اليدوي */
+    }
+    #loader svg {
+        width: 80%;
+        height: auto;
+    }
+
+    /* تحويل الناف بار لشكل أبسط أو تصغيره */
+    .nav {
+        height: auto;
+        padding: 10px 0;
+        flex-direction: column; /* ترتيب العناصر تحت بعض */
+        border-radius: 15px;
+        top: 10px;
+    }
+    
     .nav .logo {
-        font-size: 25px;
+        font-size: 24px;
         margin-bottom: 10px;
     }
 
@@ -564,7 +560,7 @@ ul a:hover{
         border-right: none;
         padding-right: 0;
         gap: 10px;
-        flex-wrap: wrap; /* عشان اللينكات متنزلش تحت بعض بشكل وحش */
+        flex-wrap: wrap; /* السماح للعناصر بالنزول لسطر جديد لو زادت */
         justify-content: center;
     }
 
@@ -572,13 +568,18 @@ ul a:hover{
         font-size: 14px;
     }
 
+    .g {
+        margin-top: 10px;
+    }
+
+    /* تعديل نصوص الهيرو (Home Section) */
     .text {
-        margin-top: 30%; /* زيادة المسافة عشان الـ Nav اللي كبر */
+        margin-top: 30%; /* زيادة المسافة من فوق عشان الناف بار */
     }
 
     .text h1 {
         font-size: 32px;
-
+        width: 95%;
     }
 
     .text span {
@@ -587,27 +588,30 @@ ul a:hover{
 
     .text p {
         font-size: 18px;
-        text-align: center;
+        width: 90%;
+        line-height: 1.6;
     }
 
-    .ai-matrix-loader {
-        width: 100px;
-        height: 140px;
-    }
-    
-    /* إخفاء دخان الخلفية لو بيعمل بطء في الموبايل أو بيغطي ع الكلام */
-    .home::before, .home::after {
-        display: none; 
-    }
+    /* تصغير خطوط الدخان الخلفية */
+    .home::before { left: 10%; }
+    .home::after { left: 90%; }
 }
 
-/* الشاشات الصغيرة جداً */
+/* 3. للهواتف الصغيرة جداً */
 @media (max-width: 480px) {
     .nav ul {
-        display: none; /* هنا يفضل تعمل زرار Menu، بس حالياً هنخفيهم عشان الزحمة */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* ترتيب الروابط في شبكة */
+        text-align: center;
     }
-    .nav .g {
-        margin-top: 5px;
+    .ul{
+      display: flex;
+    }
+    .text{
+      margin-top: 200px;
+    }
+    .text h1 {
+        font-size: 28px;
     }
 }
 
@@ -628,19 +632,14 @@ ul a:hover{
 
 
 
-
-
-
-
-
-
+/*//////////////////////////////////////////////////////////*/
 
 
 
 
 .about{
     width: 100%;
-    height: 130vh;
+    height: 100vh;
     background-color:var(--bg-color);
     display: flex;
     justify-content: center;
@@ -656,19 +655,24 @@ ul a:hover{
     height: 90%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
 }
 .abou .text2{
+  
     padding: 40px;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    text-align: center;
+    align-items: center;
 
     height: 30%;
 }
 .text2 .p1{ 
     
-    position: relative;
-    top: 10px;
+
     color:var(--text-color);
     gap: 2px;
     word-spacing: 0px;
@@ -676,90 +680,42 @@ ul a:hover{
 }
 .text2 h1{
     font-weight: 900;
-    position: relative;
-    top: 20px;
+
     font-size: 50px;
 
 }
 .text2 h1 span{
-    color: var(--one);
+    color: var(--two);
 }
 .text2 .p2{
     
-    position: relative;
-    top: 40px;
-       color: var(--two);
+
+       color: var(--text-color);
     font-size: 25px;
     width: 700px;
 }
 .p2 span{
-    color: var(--one);
-}
-.text2 .p3{
-        color:var(--text-color);
-   font-size: 25px; 
-    position: relative;
-    top: 50px;
-        width: 700px;
-
-}
-.p3 span{
-    color: var(--one);
-}
-.img img{
-    position: absolute;
-    right: 300px;
-    bottom: 520px;
-    border-radius: 50%;
-    width: 500px;
-    height: 500px;
-    box-shadow: 10px 10px 10px var(--two) , -10px -10px 10px var(--two), -10px 10px 10px var(--cy),10px -10px 10px var(--cy) ;
-animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
+    color: var(--two);
 }
 
-@keyframes pulse {
-    0% { transform: scale(.9); }
-    50% { transform: scale(1); }
-    100% { transform: scale(.9); }
-}
-
-@keyframes shadowColor {
-    0% {
-        box-shadow: 
-            10px 10px 20px ,
-            -10px -10px 20px ,
-            -10px 10px 20px  ,
-            10px -10px 20px ;
-    }
-
-    50% {
-        box-shadow: 
-            10px 10px 20px ,
-            -10px -10px 20px  ,
-            -10px 10px 20px ,
-            10px -10px 20px  ;
-    }
- 
-}
 
 .ved {
-    padding-top: 200px;
-  width: 100%;
-  height: 100vh; /* أو الطول اللي تحبه */
+  border-radius: 30px;
+  background-color: var(--text-color);
+  width: 90%;
+  height: 50%;
   overflow: hidden; /* ضروري جداً عشان الحركة متطلعش بره السكشن */
-  display: flex;
-  align-items: center;
-  justify-content: center;
   perspective: 1000px;
   display: flex;
-  gap: 40px;
+  gap: 150px;
   justify-content: center;
   align-items: center;
   
 }
 
 .parallax-media {
-
+position: relative;
+bottom: 30px;
   width: 400px;
 
   object-fit: cover;
@@ -786,19 +742,12 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
 .top-title {
     font-size: 1.2rem;
     letter-spacing: 0.3rem;
-    color: var(--text-color);
+    color: var(--bg-color);
     margin-bottom: -20px; /* لتقريبه من الكلمة الكبيرة */
     font-weight: 400;
 }
 
-/* حاوية الكلمة والشعار */
-.logo-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
+
 
 .main-brand {
     font-size: clamp(8rem, 25vw, 8rem); /* خط مرن يكبر مع الشاشة */
@@ -808,160 +757,20 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
     letter-spacing: -0.05em;
 }
 
-/* مكان الشعار الـ 3D */
-.three-d-model {
-    position: absolute;
-    width: 20%; /* تحكم في حجم الشعار من هنا */
-    z-index: 2;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none; /* عشان ما يمنعش تحديد النص لو رغبت */
-}
 
-.three-d-model img {
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
-}
 
-/* الجزء السفلي */
-.bottom-content {
-    margin-top: 20px;
-}
+
 
 .description {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--text-dark);
+    color: var(--bg-color);
     max-width: 700px;
     margin-bottom: 30px;
 }
 
-.footer-info {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--text-dark);
-    line-height: 0.5;
-}
 
 
-
-
-
-
-
-
-
-/* --- الشاشات المتوسطة (Tablets) --- */
-@media screen and (max-width: 1024px) {
-    .about {
-        height: auto; /* السماح للمحتوى بالنمو */
-        padding: 50px 0;
-    }
-
-    .about .abou {
-        height: auto;
-        padding-bottom: 40px;
-    }
-
-    .img img {
-        position: relative; /* تحويلها لمكانه الطبيعي */
-        right: auto;
-        bottom: auto;
-        width: 350px;
-        height: 350px;
-        margin: 40px auto; /* توسيط الصورة */
-        display: block;
-    }
-
-    .text2 .p2, .text2 .p3 {
-        width: 90%; /* جعل النصوص مرنة */
-    }
-}
-
-/* --- الشاشات الصغيرة (Mobile) --- */
-@media screen and (max-width: 768px) {
-    /* 1. قسم About */
-    .about .abou {
-        width: 95%;
-        border-radius: 15px;
-    }
-
-    .text2 {
-        padding: 20px;
-        text-align: center;
-    }
-
-    .text2 h1 {
-        font-size: 32px; /* تصغير العنوان الضخم */
-    }
-
-    .text2 .p2, .text2 .p3 {
-        font-size: 18px;
-        width: 100%;
-        top: 20px; /* تقليل الإزاحات العلوية */
-    }
-
-    .img img {
-        width: 250px;
-        height: 250px;
-    }
-
-    /* 2. قسم الفيديو Parallax */
-    .ved {
-        flex-direction: column; /* العناصر تحت بعضها */
-        height: auto;
-        padding-top: 50px;
-        gap: 20px;
-    }
-
-    .parallax-media {
-        width: 90%; /* العرض بالكامل تقريباً */
-        height: auto;
-    }
-
-    /* 3. قسم Hero Section (Main Brand) */
-    .main-brand {
-        font-size: 18vw; /* استخدام وحدات العرض ليبقى النص داخل الشاشة */
-    }
-
-    .top-title {
-        font-size: 0.9rem;
-        letter-spacing: 0.1rem;
-    }
-
-    .three-d-model {
-        width: 40%; /* تكبير الشعار قليلاً ليكون واضحاً */
-    }
-
-    .description {
-        font-size: 0.95rem;
-        padding: 0 15px;
-    }
-}
-
-/* --- الشاشات الصغيرة جداً --- */
-@media screen and (max-width: 480px) {
-  .top-title{
-    position: relative;
-    bottom: 40px;
-    left: 10px;
-  }
-    .main-brand {
-        font-size: 15vw;
-        margin-left: 5px;
-    }
-
-    .text2 h1 {
-        font-size: 28px;
-    }
-
-    .img img {
-        width: 200px;
-        height: 200px;
-    }
-}
 
 
 
@@ -1329,111 +1138,131 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   margin-bottom: 64px;
 }
 
-/* --- الشاشات المتوسطة (Tablets) --- */
-@media screen and (max-width: 1024px) {
-    .works {
-        height: auto;
-        padding: 50px 0;
+/* --- Media Queries للسكشنز الجديدة --- */
+
+@media (max-width: 1024px) {
+    /* سكشن About */
+    .text2 .p2 {
+        width: 80%; /* تقليل عرض الفقرة */
+        font-size: 20px;
+    }
+    
+    .ved {
+        gap: 50px; /* تقليل المسافة بين العناصر */
     }
 
+    /* سكشن Works */
     .cardd {
-        width: 350px; /* تصغير الكرت ليناسب التابلت */
-        height: 320px;
-        margin-bottom: 40px;
+        width: 45%; /* كارتين في السطر */
+        height: 350px;
     }
-
-    .work {
-        height: auto;
-        gap: 20px;
+    .ved{
+      padding: 20px;
+      gap: 20px;
+    }
+    .ved h1{
+      font-size: 30px;
+    }
+        .ved h2{
+      font-size: 18px;
+      margin: 5px;
+    }
+    .ved p{
+      font-size: 16px;
     }
 }
 
-/* --- الشاشات الصغيرة (Mobile) --- */
-@media screen and (max-width: 768px) {
-    .works {
+@media (max-width: 768px) {
+    /* --- سكشن About --- */
+    .about {
+        height: auto; /* السماح للسكشن بالتمدد حسب المحتوى */
+        padding: 50px 0;
+    }
+    .about .abou {
         height: auto;
-        margin-top: 510px;
+        padding-bottom: 30px;
+    }
+    .text2 h1 {
+        font-size: 35px;
+    }
+    .text2 .p2 {
+        width: 90%;
+        font-size: 18px;
     }
 
-    /* جعل الكروت تأخذ معظم عرض الشاشة */
-    .cardd {
-        width: 90%; 
-        height: 300px;
-        margin: 20px auto;
-    }
-
-    /* إلغاء تأثير الدوران (Rotation) في الموبايل 
-       لأنه قد يسبب عرضاً زائداً (Overflow) ويجعل الصفحة تهتز */
-    .cardd:hover:before, 
-    .cardd:hover:after {
-        transform: rotate(5deg); /* دوران بسيط جداً */
-    }
-
-    .details {
-        height: 50px;
-    }
-
-    .title {
-        font-size: 16px;
-    }
-
-    .caption {
-        font-size: 14px;
-    }
-
-    /* الأزرار (Buttons) */
-    .container {
+    /* تعديل منطقة الميديا (الفيديو/الصور) */
+    .ved {
+        flex-direction: column; /* العناصر تحت بعض */
         height: auto;
         padding: 40px 0;
+        gap: 30px;
+    }
+    .parallax-media {
+        width: 80%; /* تصغير الصورة لتناسب الموبايل */
+        bottom: 0; /* إلغاء الإزاحة السفلية */
     }
 
+    /* --- سكشن Hero (البراند) --- */
+    .main-brand {
+        font-size: 5rem; /* تصغير الكلمة الضخمة */
+    }
+    .top-title {
+        font-size: 0.9rem;
+        margin-bottom: -10px;
+    }
+
+    /* --- سكشن Works --- */
+    .works {
+        height: auto;
+        padding: 60px 0;
+    }
+    .work {
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px; /* مسافة بين الكروت */
+    }
+    .cardd {
+        width: 90%; /* الكارت ياخد عرض الشاشة تقريباً */
+        max-width: 400px;
+        height: 380px;
+    }
+
+    /* --- الأزرار --- */
     .button {
-        width: 200px; /* تصغير الزر قليلاً */
+        width: 200px; /* تصغير بسيط للزرار */
         height: 50px;
         font-size: 12px;
     }
-
-    /* تقليل حجم الأنميشن في الموبايل لتجنب التباطؤ */
-    @keyframes drow1 { 100% { height: 60px; } }
-    @keyframes drow2 { 100% { width: 80px; } }
-    @keyframes drow4 { 100% { height: 70px; } }
 }
 
-/* --- الشاشات الصغيرة جداً --- */
-@media screen and (max-width: 480px) {
-    .cardd {
-        height: 250px;
+@media (max-width: 480px) {
+    .main-brand {
+        font-size: 3.5rem;
+    }
+    
+    .text2 h1 {
+        font-size: 28px;
     }
 
-    .cardd:hover .imgboxx {
-        bottom: 60px; /* تقليل مسافة الارتفاع عند الهوفر */
+    /* إلغاء تأثيرات الـ Hover المعقدة في الموبايل لسهولة الاستخدام */
+    .cardd:hover:before, 
+    .cardd:hover:after {
+        transform: none; /* الدوران ممكن يضايق المستخدم على الموبايل */
+    }
+    .ved {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      height: auto;
+      gap: 5px;
+
     }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*///////////////////////////////////////////////////////////*/
 
 
 .skills {
@@ -1479,13 +1308,6 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
     margin-bottom: 40px;
 }
 
-
-
-
-
-
-
-/* ==== Infinite Skills Marquee ==== */
 .skills-marquee {
 
     width: 100%;
@@ -1530,8 +1352,6 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
     transition: all 0.4s ease;
 }
 
-/* Hover Effect عشان يبقى في تفاعل حلو */
-
 .skill-item:hover {
     transform: translateY(-15px) scale(1.1);
     opacity: 1;
@@ -1545,7 +1365,6 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
     text-shadow: 0 0 15px currentColor;
 }
 
-/* ألوان الأيقونات زي الأصلي */
 .skill-item:nth-child(1) i, .skill-item:nth-child(10) i { color: orange; }
 .skill-item:nth-child(2) i, .skill-item:nth-child(11) i { color: rgb(0, 145, 255); }
 .skill-item:nth-child(3) i, .skill-item:nth-child(12) i { color: rgb(185, 185, 84); }
@@ -1556,7 +1375,6 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
 .skill-item:nth-child(8) i, .skill-item:nth-child(17) i { color: rgb(33, 69, 112); }
 .skill-item:nth-child(9) i, .skill-item:nth-child(18) i { color: rgb(154, 1, 121); }
 
-/* الأنيميشن الرئيسي */
 @keyframes marqueeScroll {
     0% {
         transform: translateX(0);
@@ -1566,16 +1384,9 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
     }
 }
 
-/* Pause عند الـ hover على الشريط كله (اختياري، حلو للتفاعل) */
 .skills-marquee:hover .marquee-track {
     animation-play-state: paused;
 }
-
-/* Responsive */
-
-
-
-
 
 
 .box{
@@ -1659,11 +1470,6 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   rotate: 8deg;
 }
 
-
-
-
-
-
 .box .Tool a{
     
         transition: 1s;
@@ -1710,106 +1516,102 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
 }
 
 
-/* --- تعديلات لقسم المهارات والكروت --- */
-@media screen and (max-width: 992px) {
+
+/* --- Media Queries لسكشن المهارات والبطاقات --- */
+
+@media (max-width: 1024px) {
+    .box {
+        height: auto;
+        padding: 40px 0;
+    }
+    .text3 h1 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* --- سكشن المهارات --- */
     .skills {
-        height: auto; /* السماح للطول بالتمدد */
+        height: auto; /* السماح بالتمدد */
         padding-bottom: 50px;
     }
 
     .text3 h1 {
-        font-size: 35px;
+        font-size: 32px;
     }
 
     .text3 span {
-        width: 90%; /* جعل النص مرن */
+        width: 90%; /* تصغير عرض النص ليتناسب مع الشاشة */
+        font-size: 16px;
     }
 
+    /* تعديل شريط المهارات المتحرك */
+    .skill-item i {
+        font-size: 45px; /* تصغير الأيقونات قليلاً */
+    }
+
+    /* في الموبايل، يفضل أن يظهر اسم المهارة دائماً بدلاً من الـ Hover */
+    .skill-item p {
+        opacity: 1;
+        transform: translateY(0);
+        font-size: 14px;
+        position: static; /* إلغاء الـ position المطلق لتجنب التداخل */
+    }
+
+    .skill-item:hover p {
+        bottom: 0; /* إلغاء الإزاحة الكبيرة في الموبايل */
+    }
+
+    /* --- سكشن البطاقات (The Box) --- */
     .box {
         height: auto;
-        padding: 20px;
-        gap: 30px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    /* ضبط حركة الماركي في الموبايل */
-    .skills-marquee {
-        padding: 30px 0;
-    }
-
-    .skill-item:hover {
-        transform: translateY(-5px) scale(1.05); /* تقليل الحركة في الموبايل */
-    }
-
-    /* إلغاء الـ position المطلق للـ p عند الهوفر لتجنب القفزات */
-    .skill-item:hover p {
-        bottom: 0; 
-        margin-top: 10px;
-    }
-
-    /* تنسيق الكروت (Seif Section) */
-    .seif {
-        flex-direction: column; /* الكروت تحت بعضها */
+        margin-top: 50px;
+        gap: 20px;
+        flex-direction: column; /* ترتيب البطاقات تحت بعض */
         align-items: center;
-        width: 100%;
+    }
+
+    .seif {
+        flex-direction: column; /* جعل الـ containers داخل seif تحت بعض */
+        gap: 20px;
     }
 
     .card {
-        width: 100%; /* تأخذ عرض الشاشة */
-        max-width: 320px;
-        height: auto; /* السماح للكارت بالتمدد حسب الكلام */
-        rotate: 0deg !important; /* إلغاء التدوير عند الهوفر في الموبايل لسهولة القراءة */
+        width: 280px; /* تصغير عرض البطاقة لترك مسافة جانبية */
+        height: auto; /* السماح للبطاقة بالتمدد حسب المحتوى */
+        padding: 20px;
     }
 
+    /* إلغاء تدوير البطاقة القوي في الموبايل لأنه قد يخرج عن حدود الشاشة */
     .card:hover {
-        transform: translateY(-10px); /* استبدال الـ rotate بـ رفعة بسيطة */
+        rotate: 3deg;
     }
 
-    .box .fron a, .box .Tool a, .box .System a, .box .Problem a {
-        font-size: 14px; /* توحيد حجم خط الروابط في الموبايل */
-        padding: 8px 12px;
-    }
-}
-
-/* --- تحسينات الشاشات الصغيرة جداً --- */
-@media screen and (max-width: 480px) {
-    .text3 h1 {
-        font-size: 28px;
-    }
-
-    .skill-item i {
-        font-size: 35px;
-    }
-
-    .card .heading {
-        font-size: 18px;
-    }
-    .work{
-      position: relative;
-      bottom: 800px;
-    }
-
-}
-
-
-
-@media (max-width: 768px) {
-    .marquee-track {
-        gap: 40px;
-        animation-duration: 25s; 
-    }
-    .skill-item {
-        min-width: 100px;
-    }
-    .skill-item i {
-        font-size: 40px;
-    }
-    .skill-item p {
+    /* تعديل أحجام الروابط داخل البطاقات */
+    .box .fron a {
         font-size: 16px;
     }
 }
 
+@media (max-width: 480px) {
+    .text3 h1 {
+        font-size: 28px;
+    }
+    
+    .div1 {
+        font-size: 14px;
+    }
+
+    .card {
+        width: 85%; /* البطاقة تأخذ أغلب عرض الشاشة */
+    }
+    
+    .marquee-track {
+        animation-duration: 7s; /* تسريع الحركة قليلاً للشاشات الصغيرة */
+    }
+
+
+}
 
 
 
@@ -1822,13 +1624,7 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
 
 
 
-
-
-
-
-
-
-
+/*///////////////////////////////////////////////////////////*/
 
 
 
@@ -1836,16 +1632,17 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
 
 
 .contact{
-    border:1px solid var(--text-color) ;
-    border-radius: 20px;
-    margin-top: 40px;
+    border-top:1px solid var(--text-color) ;
+
+    margin: 50px 0px;
+
         display: flex;
             flex-wrap: wrap;
             background-color: var(--bg-color);
             justify-content: center;
             width: 100%;
-            height: 115vh;
-            gap: 60px;
+            height: 100vh;
+            gap: 80px;
       overflow: hidden;
 
         }
@@ -1911,6 +1708,11 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
     gap: 50px;
     align-items: center;
     flex-wrap: wrap;
+    background-color: var(--text-color);
+    padding: 50px;
+    border-bottom-right-radius:40px ;
+     filter: drop-shadow(-5px 5px 0px var(--two));
+ 
 }
 
 
@@ -2105,12 +1907,12 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   justify-content: center;
   height: 100px;
   width: 100px;
-  background-color: #0a0a0a;
+  background-color: var(--text-color);
   border-radius: 5px;
   color: rgba(83, 83, 83, 0.363);
   font-weight: 700;
   transition: 300ms;
-  outline: rgba(83, 83, 83, 0.363) 2px solid;
+  outline: var(--bg-color) 2px solid;
   outline-offset: 20;
 }
 
@@ -2134,7 +1936,7 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   top: 0;
   width: 10px;
   height: 10px;
-  background-color: #0a0a0a;
+  background-color: var(--bg-color);
   border-radius: 10px;
   z-index: 2;
 }
@@ -2193,12 +1995,12 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   justify-content: center;
   height: 100px;
   width: 100px;
-  background-color: #0a0a0a;
+  background-color: var(--text-color);
   border-radius: 5px;
   color: rgba(83, 83, 83, 0.363);
   font-weight: 700;
   transition: 300ms;
-  outline: rgba(83, 83, 83, 0.363) 2px solid;
+  outline: var(--bg-color) 2px solid;
   outline-offset: 20;
 }
 
@@ -2223,7 +2025,7 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   top: 0;
   width: 10px;
   height: 10px;
-  background-color: #0a0a0a;
+  background-color: var(--bg-color);
   border-radius: 10px;
   z-index: 2;
 }
@@ -2238,12 +2040,12 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
 }
 
 .light-button2 button.bt2:hover .button-holder2 svg {
-  fill: rgb(65, 65, 106);
+  fill: rgb(141, 141, 239);
 }
 
 .light-button2 button.bt2:hover .button-holder2 {
-  color: rgb(65, 65, 106);
-  outline: rgb(65, 65, 106) 2px solid;
+  color:  rgb(141, 141, 239);
+  outline:  rgb(141, 141, 239) 2px solid;
   outline-offset: 2px;
 }
 
@@ -2251,7 +2053,7 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   background: rgb(255, 255, 255);
   background: linear-gradient(
     180deg,
-    rgb(65, 65, 106) 0%,
+     rgb(141, 141, 239) 0%,
     rgba(255, 255, 255, 0) 75%,
     rgba(255, 255, 255, 0) 100%
   );
@@ -2291,12 +2093,12 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   justify-content: center;
   height: 100px;
   width: 100px;
-  background-color: #0a0a0a;
+  background-color: var(--text-color);
   border-radius: 5px;
   color: rgba(83, 83, 83, 0.363);
   font-weight: 700;
   transition: 300ms;
-  outline: rgba(83, 83, 83, 0.363) 2px solid;
+  outline: var(--bg-color) 2px solid;
   outline-offset: 20;
 }
 
@@ -2320,7 +2122,7 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   top: 0;
   width: 10px;
   height: 10px;
-  background-color: #0a0a0a;
+  background-color:var(--bg-color);
   border-radius: 10px;
   z-index: 2;
 }
@@ -2399,12 +2201,12 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   justify-content: center;
   height: 100px;
   width: 100px;
-  background-color: #0a0a0a;
+  background-color: var(--text-color);
   border-radius: 5px;
   color: rgba(83, 83, 83, 0.363);
   font-weight: 700;
   transition: 300ms;
-  outline: rgba(83, 83, 83, 0.363) 2px solid;
+  outline: var(--bg-color) 2px solid;
   outline-offset: 20;
 }
 
@@ -2428,7 +2230,7 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
   top: 0;
   width: 10px;
   height: 10px;
-  background-color: #0a0a0a;
+  background-color:var(--bg-color);
   border-radius: 10px;
   z-index: 2;
 }
@@ -2461,39 +2263,39 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
     rgba(255, 255, 255, 0) 100%
   );
 }
-/* --- الشاشات المتوسطة (Tablets) --- */
-@media screen and (max-width: 1024px) {
+
+
+
+/* --- Media Queries لسكشن Contact --- */
+
+@media (max-width: 1024px) {
     .contact {
         height: auto;
-        padding: 60px 20px;
+        padding: 50px 20px;
     }
-
+    
     .form-container {
-        width: 80%; /* تكبير الفورم ليشغل مساحة أكبر */
+        width: 60%; /* زيادة عرض الفورم قليلاً */
     }
 
     .con {
-        flex-direction: column;
+        flex-direction: column; /* ترتيب أزرار التواصل أسفل الفورم */
         gap: 50px;
     }
 }
 
-/* --- الشاشات الصغيرة (Mobile) --- */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .contact {
         height: auto;
-        gap: 30px;
-        border-radius: 0; /* إلغاء الحواف الكبيرة في الموبايل */
+        gap: 40px;
     }
 
-    /* 1. النصوص العلوية */
     .text4 h3 {
-        font-size: 32px; /* تصغير العنوان الضخم */
-        text-align: center;
+        font-size: 38px; /* تصغير حجم العنوان */
     }
 
     .text4 span {
-        width: 90%;
+        width: 90%; /* النص الفرعي يأخذ كامل العرض */
         font-size: 16px;
     }
 
@@ -2501,58 +2303,66 @@ animation: pulse 3s infinite ease-in-out,hadowColor 6s infinite ease-in-out;
         margin-top: 50px; /* تقليل المسافة العلوية */
     }
 
-    /* 2. حاوية الفورم */
+    /* تعديل حاوية الفورم */
     .form-container {
-        width: 100%;
-        margin: 10px 0;
+        width: 90%;
+        height: auto;
         padding: 20px;
-        height: auto; /* جعل الارتفاع مرن */
+        margin: 20px auto;
     }
 
-    .heading {
-        font-size: 1.2rem;
-    }
-
-    /* 3. أزرار التواصل الاجتماعي (Social Buttons) */
+    /* جعل الأزرار (LinkedIn, WhatsApp... إلخ) تظهر بشكل شبكي */
     .con {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* ترتيب الأزرار 2 في كل سطر */
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr); /* زرين في كل سطر */
         justify-items: center;
+        width: 100%;
+        gap: 20px;
     }
 
-    /* ضبط أحجام أزرار الإضاءة لتناسب الموبايل */
+    /* تصغير تأثير الأزرار المضيئة للموبايل */
     .light-button button.bt, 
     .light-button2 button.bt2, 
     .light-button3 button.bt3, 
     .light-button4 button.bt4 {
-        height: 150px; /* تقليل الارتفاع */
+        height: 160px; /* تقليل الارتفاع الإجمالي */
     }
 
     .button-holder, .button-holder2, .button-holder3, .button-holder4 {
-        width: 80px !important; /* تصغير حجم المربع */
-        height: 80px !important;
+        width: 80px;
+        height: 80px;
     }
-
-    .light-holder, .light-holder2, .light-holder3, .light-holder4 {
-        height: 150px !important;
+    
+    /* في الموبايل يفضل ظهور الضوء بشكل خفيف دائماً لأن الـ hover غير مستقر */
+    .light-holder .light, .light-holder2 .light2, 
+    .light-holder3 .light3, .light-holder4 .light4 {
+        opacity: 0.5;
     }
 }
 
-/* --- الشاشات الصغيرة جداً --- */
-@media screen and (max-width: 480px) {
-  .contact{
-    overflow: hidden;
-  }
+@media (max-width: 480px) {
     .text4 h3 {
-        font-size: 26px;
+        font-size: 30px;
     }
 
     .form-container .form .button-container {
-        flex-direction: column; /* جعل أزرار الإرسال تحت بعضها */
+        flex-direction: column; /* جعل أزرار الإرسال والمسح تحت بعض */
     }
 
-    .con {
-        grid-template-columns: 1fr; /* زر واحد في كل سطر */
+    .form-container .form .button-container .send-button,
+    .form-container .form .button-container .reset-button-container {
+        flex-basis: 100%;
+        width: 100%;
     }
+
+    /* جعل أزرار التواصل زر واحد في كل سطر للهواتف الصغيرة جداً */
+    .con {
+      padding-right: 30px;
+        grid-template-columns: 1fr;
+    }
+}
+
+/* حل مشكلة الـ overflow الناتجة عن الأنيميشن */
+.contact {
+    overflow-x: hidden;
 }
