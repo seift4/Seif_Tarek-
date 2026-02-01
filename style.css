@@ -209,14 +209,14 @@ border-radius: 0px;
 
 /* دخان Wheat */
 .home::after {
-    left: 75%;
+    right: 25%;
     background: linear-gradient(
         to bottom,
         transparent,
         var(--two)
         transparent
     );
-    animation-delay: 5s;
+    animation-delay: 1s;
 }
 .li {
     color: var(--bg-color);
@@ -250,7 +250,7 @@ border-radius: 0px;
     }
     100% {
         transform: translateX(-20px) scaleY(0.9);
-        opacity: 0;
+        opacity: 1;
     }
 }
 
@@ -2341,6 +2341,9 @@ bottom: 30px;
 }
 
 @media (max-width: 480px) {
+  body{
+    overflow: hidden;
+  }
     .text4 h3 {
         font-size: 30px;
     }
@@ -2366,3 +2369,16 @@ bottom: 30px;
 .contact {
     overflow-x: hidden;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
