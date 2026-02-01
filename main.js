@@ -55,13 +55,13 @@ toggleBtn.addEventListener("click", () => {
 
 (function() {
     // استبدل PUBLIC_KEY بمفتاحك الخاص من Account Settings
-    emailjs.init("YOUR_PUBLIC_KEY");
+    emailjs.init("CIURh-wVyTegOXfXy");
 })();
 
 document.getElementById('send-btn').addEventListener('click', function() {
     // تجهيز البيانات من الـ Inputs
-    const serviceID = 'YOUR_SERVICE_ID'; // هتلاقيه في Email Services
-    const templateID = 'YOUR_TEMPLATE_ID'; // هتلاقيه في Email Templates
+    const serviceID = 'service_n64ctne'; // هتلاقيه في Email Services
+    const templateID = 'template_7rsa09k'; // هتلاقيه في Email Templates
 
     const params = {
         from_name: document.getElementById("from_name").value,
