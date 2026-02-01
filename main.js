@@ -53,6 +53,52 @@ toggleBtn.addEventListener("click", () => {
 
 
 
+(function() {
+    // استبدل PUBLIC_KEY بمفتاحك الخاص من Account Settings
+    emailjs.init("YOUR_PUBLIC_KEY");
+})();
+
+document.getElementById('send-btn').addEventListener('click', function() {
+    // تجهيز البيانات من الـ Inputs
+    const serviceID = 'YOUR_SERVICE_ID'; // هتلاقيه في Email Services
+    const templateID = 'YOUR_TEMPLATE_ID'; // هتلاقيه في Email Templates
+
+    const params = {
+        from_name: document.getElementById("from_name").value,
+        email_id: document.getElementById("email_id").value,
+        message: document.getElementById("message").value
+    };
+
+    // إرسال الإيميل
+    emailjs.send(serviceID, templateID, params)
+        .then(res => {
+            alert("تم الإرسال بنجاح! هرد عليك قريب جداً.");
+            // تفريغ الفورم بعد الإرسال
+            document.getElementById("from_name").value = "";
+            document.getElementById("email_id").value = "";
+            document.getElementById("message").value = "";
+        })
+        .catch(err => {
+            console.log(err);
+            alert("للأسف حصل مشكلة، حاول تاني.");
+        });
+});
+
+// برمجة زرار الـ Reset
+document.getElementById('reset-btn').addEventListener('click', function() {
+    document.getElementById("from_name").value = "";
+    document.getElementById("email_id").value = "";
+    document.getElementById("message").value = "";
+});
+
+
+
+
+
+
+
+
+
 
 
 
