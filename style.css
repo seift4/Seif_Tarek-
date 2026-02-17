@@ -558,6 +558,7 @@ ul a:hover{
 
     /* تحويل الناف بار لشكل أبسط أو تصغيره */
     .nav {
+      margin-right: 30px;
       overflow: hidden; /* ضروري جداً عشان الحركة متطلعش بره السكشن */
   
         height: auto;
@@ -585,7 +586,7 @@ ul a:hover{
     }
 
     .g {
-        margin-top: 10px;
+      display: none;
     }
 
     /* تعديل نصوص الهيرو (Home Section) */
